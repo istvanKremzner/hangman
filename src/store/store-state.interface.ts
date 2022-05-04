@@ -1,8 +1,10 @@
 export interface IStoreState {
-  gameState: 'unstarted' | 'started' | 'finished'
+  gameState: GameState
   solution: string
   guesses: {
     correct: string[]
     incorrect: string[]
   }
 }
+
+export type GameState = 'unstarted' | 'started' | 'finished'

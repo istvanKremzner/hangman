@@ -1,0 +1,4 @@
+import { useSelector } from 'react-redux';
+import { IStoreState } from '../store-state.interface';
+
+export const useCorrectGuesses = () => useSelector<IStoreState, string[]>(state => state.guesses.correct);
