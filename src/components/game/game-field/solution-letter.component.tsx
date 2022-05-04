@@ -9,9 +9,14 @@ interface ISolutionLetterProps {
 
 const useSolutionLetterStyles = createUseStyles({
   letterBox: {
-    width: '1%',
-    height: 'auto',
+    width: 20,
+    height: 20,
     border: '1px solid black',
+
+    '&>p': {
+      padding: 0,
+      margin: 0,
+    },
   },
   hidden: {
     visibility: 'hidden',
