@@ -1,9 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useDispatch } from 'react-redux';
-import { wordLengthOptions } from '../../constants';
 import { startGame } from '../../store';
-import { WordLengthOptions } from '../../store/start-game.action';
+import { getWordLengths } from '../../utilts';
 import { Button } from '../button.component';
 
 type LengthOption = 'random' | number
@@ -39,7 +38,7 @@ const useGameOptionsStyles = createUseStyles({
     },
   },
   startButton: {
-    margin: '10% auto',
+    margin: '20% auto 10% auto',
   },
 });
 
@@ -49,10 +48,12 @@ export const GameOptions = () => {
   const dispatch = useDispatch();
   const [activeButton, setActiveButton] = useState<LengthOption>(5);
 
+  const wordLengths = useMemo(() => getWordLengths(), []);
+
   const handleClick = useCallback((option: LengthOption) => setActiveButton(option), [setActiveButton]);
   const handleStart = () => {
     const wordLength = activeButton === 'random' ? undefined : activeButton as number;
-    dispatch(startGame(wordLength as WordLengthOptions));
+    dispatch(startGame(wordLength));
   };
 
   return (
@@ -64,7 +65,7 @@ export const GameOptions = () => {
 
       <div className={classes.optionButtonsContainer}>
         {
-          [...wordLengthOptions, 'random'].map(option => (
+          [...wordLengths, 'random'].map(option => (
             <Button
               key={option}
               active={activeButton === option}

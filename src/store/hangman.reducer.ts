@@ -29,7 +29,7 @@ export const hangmanReducer: Reducer<IStoreState, IAction> = (
 ) => {
   const handler = actionHandlers[type];
 
-  return handler ? handler(payload, state) : state;
+  return handler ? handler(state, payload) : state;
 }
 
 const handleStartGame: IActionHandler = (state, payload: IStartGamePayload) => ({
