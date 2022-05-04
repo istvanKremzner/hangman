@@ -21,6 +21,10 @@ const useGameFieldStyles = createUseStyles({
   hangmanContainer: {
     width: '20%',
     textAlign: 'left',
+    flex: 1,
+  },
+  guessingContainer: {
+    flex: 3,
   },
 })
 
@@ -44,7 +48,7 @@ export const GameField = () => {
         <Hangman width="60%" playing />
       </div>
 
-      <div>
+      <div className={classes.guessingContainer}>
         <PlayerMessage />
 
         <Solution />

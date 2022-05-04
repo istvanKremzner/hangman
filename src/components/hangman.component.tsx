@@ -9,6 +9,8 @@ interface IHangmanProps {
 
 const useHangmanStyles = createUseStyles({
   hangman: {
+    minWidth: 50,
+
     '& path, & circle': {
       stroke: ' #000',
       strokeWidth: '0.25',
