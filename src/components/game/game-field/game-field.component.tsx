@@ -53,7 +53,7 @@ export const GameField = () => {
     dispatch(resetGame());
     navigate('/');
   }
-  const handleNewGameClick = () => dispatch(startGame())
+  const handleNewGameClick = () => dispatch(resetGame());
 
   return (
     <div className={classes.gameContainer}>
@@ -69,7 +69,10 @@ export const GameField = () => {
         <Letters />
 
         {
-          playerState === 'lost' &&
+          (
+            playerState === 'lost' ||
+            playerState === 'won'
+          ) &&
           <div className={classes.footerButtonContainer}>
             <Button
               inverted
