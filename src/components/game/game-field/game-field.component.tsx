@@ -26,6 +26,19 @@ const useGameFieldStyles = createUseStyles({
   guessingContainer: {
     flex: 3,
   },
+
+  '@media (min-width: 0px)': {
+    gameContainer: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    }
+  },
+  '@media (min-width: 900px)': {
+    gameContainer: {
+      flexDirection: 'row',
+      alignItems: 'start',
+    }
+  },
 })
 
 export const GameField = () => {

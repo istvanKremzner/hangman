@@ -7,9 +7,36 @@ import { Button } from '../../button.component';
 const useLettersStyles = createUseStyles({
   lettersContainer: {
     display: 'grid',
+    justifyContent: 'center',
+    alignItems: 'center',
     gridTemplateColumns: 'repeat(7, 1fr)',
     gap: 4,
     padding: '15% 0',
+
+    '& button': {
+      maxWidth: 48,
+      maxHeight: 48,
+    },
+  },
+  '@media (min-width: 0px)': {
+    lettersContainer: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    }
+  },
+  '@media (min-width: 400px)': {
+    lettersContainer: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    }
+  },
+  '@media (min-width: 600px)': {
+    lettersContainer: {
+      gridTemplateColumns: 'repeat(4, 1fr)',
+    }
+  },
+  '@media (min-width: 900px)': {
+    lettersContainer: {
+      gridTemplateColumns: 'repeat(7, 1fr)',
+    }
   },
 });
 
