@@ -12,10 +12,12 @@ const useSolutionLetterStyles = createUseStyles({
     width: 20,
     height: 20,
     border: '1px solid black',
+    margin: 1,
 
     '&>p': {
       padding: 0,
       margin: 0,
+      textTransform: 'uppercase',
     },
   },
   hidden: {
@@ -29,6 +31,7 @@ export const SolutionLetter: FC<ISolutionLetterProps> = ({
   const classes = useSolutionLetterStyles();
 
   const correctGuesses = useCorrectGuesses();
+
   const isFound = useMemo(() => correctGuesses.includes(letter), [correctGuesses, letter]);
 
   return (
