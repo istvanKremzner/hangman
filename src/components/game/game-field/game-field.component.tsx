@@ -41,7 +41,7 @@ export const GameField = () => {
   return (
     <div className={classes.gameContainer}>
       <div className={classes.hangmanContainer}>
-        <Hangman width="60%" />
+        <Hangman width="60%" playing />
       </div>
 
       <div>

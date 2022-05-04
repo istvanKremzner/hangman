@@ -10,7 +10,7 @@ export const Home = () => {
 
   return (
     <>
-      <Hangman width="30%" />
+      <Hangman width="10%" />
 
       <h2>Game instructions</h2>
       <p>
