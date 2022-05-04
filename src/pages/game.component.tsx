@@ -1,7 +1,9 @@
+import { PageBase } from '../components';
+
 export const Game = () => {
   return (
-    <main>
+    <PageBase>
       Welcome to the game!
-    </main>
+    </PageBase>
   );
 };
