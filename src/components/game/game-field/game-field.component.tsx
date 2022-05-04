@@ -1,17 +1,26 @@
-import { useMemo } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { resetGame, startGame, useCorrectGuesses, useSolution } from '../../../store';
+import { resetGame, startGame, usePlayerState } from '../../../store';
 import { Button } from '../../button.component';
+import { Hangman } from '../../hangman.component';
 import { Letters } from './letters.component';
+import { PlayerMessage } from './player-message.component';
 import { Solution } from './solution.component';
 
 const useGameFieldStyles = createUseStyles({
+  gameContainer: {
+    display: 'flex',
+    alignItems: 'start',
+  },
   footerButtonContainer: {
     display: 'flex',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+  hangmanContainer: {
+    width: '20%',
+    textAlign: 'left',
   },
 })
 
@@ -21,14 +30,7 @@ export const GameField = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const correctGuesses = useCorrectGuesses();
-  const solution = useSolution();
-
-  const hasPlayerWon = useMemo(
-    () => solution.split('').every(letter => correctGuesses.includes(letter)),
-    [solution, correctGuesses]
-  );
-  // const hasPlayerLost = useMemo(() => solution.length === correctGuesses.length, [solution, correctGuesses]);
+  const playerState = usePlayerState();
 
   const handleEndGameClick = () => {
     dispatch(resetGame());
@@ -37,34 +39,35 @@ export const GameField = () => {
   const handleNewGameClick = () => dispatch(startGame())
 
   return (
-    <>
-      {
-        hasPlayerWon &&
-        <p>You've won</p>
-      }
+    <div className={classes.gameContainer}>
+      <div className={classes.hangmanContainer}>
+        <Hangman width="60%" />
+      </div>
 
-      <Solution />
+      <div>
+        <PlayerMessage />
 
-      <p>Play with a word</p>
+        <Solution />
+        <p>Play with a word</p>
+        <Letters />
 
-      <Letters />
-
-      {
-        hasPlayerWon &&
-        <div className={classes.footerButtonContainer}>
-          <Button
-            inverted
-            onClick={handleEndGameClick}
-          >
-            End Game
-          </Button>
-          <Button
-            onClick={handleNewGameClick}
-          >
-            Start New Game
-          </Button>
-        </div>
-      }
-    </>
+        {
+          playerState === 'lost' &&
+          <div className={classes.footerButtonContainer}>
+            <Button
+              inverted
+              onClick={handleEndGameClick}
+            >
+              End Game
+            </Button>
+            <Button
+              onClick={handleNewGameClick}
+            >
+              Start New Game
+            </Button>
+          </div>
+        }
+      </div>
+    </div>
   )
 };

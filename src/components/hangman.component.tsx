@@ -1,14 +1,9 @@
-// svg path, svg circle {
-//   stroke: #000;
-//   stroke-width: 0.25;
-//   stroke-linecap: round;
-//   fill: none;
-
 import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
+import { useIncorrectGuesses } from '../store';
 
 interface IHangmanProps {
-  width: string;
+  width?: string;
 }
 
 const useHangmanStyles = createUseStyles({
@@ -24,10 +19,11 @@ const useHangmanStyles = createUseStyles({
 
 
 export const Hangman: FC<IHangmanProps> = ({
-  width,
+  width = 'auto',
 }) => {
   const classes = useHangmanStyles();
 
+  const incorrectGuesses = useIncorrectGuesses();
 
   return (
     <svg
@@ -36,16 +32,16 @@ export const Hangman: FC<IHangmanProps> = ({
       height="auto"
       viewBox="0 0 10 12"
     >
-      <path d="M1,11 h8" />
-      <path d="M9,11 v-10" />
-      <path d="M9,1 h-4" />
-      <path d="M5,1 v2" />
-      <circle cx="5" cy="4" r="1" />
-      <path d="M5,5 v3" />
-      <path d="M5,5 l-2,2" />
-      <path d="M5,5 l2,2" />
-      <path d="M5,8 l-2,2" />
-      <path d="M5,8 l2,2" />
+      {incorrectGuesses.length > 0 && <path id="land" d="M1,11 h8" />}
+      {incorrectGuesses.length > 1 && <path id="gallow-vertical" d="M9,11 v-10" />}
+      {incorrectGuesses.length > 2 && <path id="gallow-horizontal" d="M9,1 h-4" />}
+      {incorrectGuesses.length > 3 && <path id="rope" d="M5,1 v2" />}
+      {incorrectGuesses.length > 4 && <circle id="head" cx="5" cy="4" r="1" />}
+      {incorrectGuesses.length > 5 && <path id="body" d="M5,5 v3" />}
+      {incorrectGuesses.length > 6 && <path id="left-arm" d="M5,5 l-2,2" />}
+      {incorrectGuesses.length > 7 && <path id="right-arm" d="M5,5 l2,2" />}
+      {incorrectGuesses.length > 8 && <path id="left-leg" d="M5,8 l-2,2" />}
+      {incorrectGuesses.length > 9 && <path id="right-leg" d="M5,8 l2,2" />}
     </svg>
   );
 };
