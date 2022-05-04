@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import { useDispatch } from 'react-redux';
 import { alphabet } from '../../../constants';
-import { addGuess, useGuesses } from '../../../store';
+import { addGuess, useGuesses, usePlayerState } from '../../../store';
 import { Button } from '../../button.component';
 
 const useLettersStyles = createUseStyles({
@@ -18,8 +18,13 @@ export const Letters = () => {
   const dispatch = useDispatch();
 
   const guesses = useGuesses();
+  const playerState = usePlayerState();
 
   const handleLetterClick = (letter: string) => {
+    if (playerState === 'lost' || playerState === 'won') {
+      return;
+    }
+
     dispatch(addGuess(letter));
   };
 
