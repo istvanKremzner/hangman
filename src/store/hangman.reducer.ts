@@ -61,7 +61,15 @@ const handleAddGuess: IActionHandler<IAddGuessPayload> = (state, { letter }) => 
   }
 };
 
+const handleResetGame: IActionHandler<undefined> = (state) => {
+  return {
+    ...defaultState,
+  }
+};
+
+
 const actionHandlers: Record<Actions, IActionHandler> = {
   [Actions.START_GAME]: handleStartGame,
   [Actions.ADD_GUESS]: handleAddGuess,
+  [Actions.RESET_GAME]: handleResetGame,
 };
