@@ -6,22 +6,39 @@ type HTMLButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLBu
 
 interface IButtonProps extends HTMLButtonProps {
   inverted?: boolean
+  active?: boolean
 }
 
 
 const useButtonStyles = createUseStyles({
   button: {
-    backgroundColor: 'black',
-    color: 'white',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     boxShadow: '0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%)',
     padding: '6px 16px',
     borderRadius: 4,
     borderColor: 'transparent',
     textTransform: 'uppercase',
 
+    backgroundColor: 'black',
+    color: 'white',
+
+    '&:hover, &.active': {
+      backgroundColor: 'white',
+      color: 'black',
+      cursor: 'pointer',
+      boxShadow: '0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)',
+    },
+
     '&.inverted': {
       backgroundColor: 'white',
       color: 'black',
+
+      '&:hover, &.active': {
+        backgroundColor: 'black',
+        color: 'white',
+      },
     },
   },
 });
@@ -29,6 +46,7 @@ const useButtonStyles = createUseStyles({
 export const Button: FC<IButtonProps> = ({
   className,
   inverted = false,
+  active = false,
   ...props
 }) => {
   const classes = useButtonStyles();
@@ -38,9 +56,10 @@ export const Button: FC<IButtonProps> = ({
       {...props}
       className={
         clsx({
-          className,
+          [className ?? '']: true,
           [classes.button]: true,
           inverted: inverted,
+          active: active,
         })}
 
     />

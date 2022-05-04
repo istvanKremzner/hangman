@@ -1,7 +1,17 @@
+import { GameField, GameOptions } from '../components';
+import { useGameState } from '../store';
+
 export const Game = () => {
+  const gameState = useGameState();
+
   return (
-    <span>
-      Welcome to the game!
-    </span>
+    <div>
+      {
+        gameState === 'unstarted' && <GameOptions />
+      }
+      {
+        gameState === 'started' && <GameField />
+      }
+    </div>
   );
 };

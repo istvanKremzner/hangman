@@ -1,7 +1,8 @@
+import { wordLengthOptions } from '../constants';
 import { getRandomElement } from '../utilts';
 import { Actions } from './actions.constant';
 
-type WordLengthOptions = 3 | 4 | 5 | 7 | 8 | 9;
+export type WordLengthOptions = 3 | 4 | 5 | 7 | 8 | 9;
 
 export interface IStartGameAction {
   type: Actions.START_GAME,
@@ -9,15 +10,13 @@ export interface IStartGameAction {
 }
 
 export interface IStartGamePayload {
-    wordLength: number,
+    wordLength: number
 }
 
 type StartGameActionCreator = (wordLength?: WordLengthOptions) => IStartGameAction;
 
-const lengthOptions = [3, 4, 5, 7, 8, 9];
-
 export const startGame: StartGameActionCreator = (wordLength?) => {
-  const length = wordLength ?? getRandomElement(lengthOptions);
+  const length = wordLength ?? getRandomElement(wordLengthOptions);
 
   return {
     type: Actions.START_GAME,
