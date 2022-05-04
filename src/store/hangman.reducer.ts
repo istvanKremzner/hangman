@@ -2,6 +2,7 @@ import { Reducer } from '@reduxjs/toolkit';
 import { getRandomWord } from '../utilts';
 import { Actions } from './actions.constant';
 import { IAddGuessPayload } from './add-guess.action';
+import { getPersistedStoreState, persistStoreState } from './persisting';
 import { IStartGamePayload } from './start-game.action';
 import { IStoreState } from './store-state.interface';
 
@@ -22,15 +23,20 @@ interface IAction {
 type IActionHandler<Payload = any> = (state: IStoreState, payload: Payload) => IStoreState
 
 export const hangmanReducer: Reducer<IStoreState, IAction> = (
-  state = defaultState,
+  state = getPersistedStoreState() ?? defaultState,
   {
     type,
     payload,
   }
 ) => {
   const handler = actionHandlers[type];
+  const newState = handler ? handler(state, payload) : state;
 
-  return handler ? handler(state, payload) : state;
+  if(newState !== state){
+    persistStoreState(newState);
+  }
+
+  return newState;
 }
 
 const handleStartGame: IActionHandler<IStartGamePayload> = (state, payload: IStartGamePayload) => ({
