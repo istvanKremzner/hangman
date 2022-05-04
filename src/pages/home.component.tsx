@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, Hangman, PageBase } from '../components';
+import { Button, Hangman } from '../components';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ export const Home = () => {
   };
 
   return (
-    <PageBase>
+    <>
       <Hangman width="30%" />
 
       <h2>Game instructions</h2>
@@ -27,6 +27,6 @@ export const Home = () => {
       <Button onClick={handleButtonClick}>
         Got it
       </Button>
-    </PageBase>
+    </>
   );
 };
