@@ -17,6 +17,7 @@ const useButtonStyles = createUseStyles({
     padding: '6px 16px',
     borderRadius: 4,
     borderColor: 'transparent',
+    textTransform: 'uppercase',
 
     '&.inverted': {
       backgroundColor: 'white',
